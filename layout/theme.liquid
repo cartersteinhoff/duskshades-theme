@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>
       {{ page_title }}
     </title>
 
     {{ content_for_header }}
-   
-    <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    </script>
   </head>
-
+  {% section 'header' %}
   <body>
- 
     {{ content_for_layout }}
-
   </body>
 </html>
