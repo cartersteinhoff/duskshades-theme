@@ -1,14 +1,35 @@
 <header>
-  <div class="flex">
-    <img src="{{ 'MobileHamburgerMenu.svg' | asset_img_url }}" loading="lazy">
-    {% comment %}
-       <nav>
+  <div class="relative flex justify-between px-4 py-3">
+    <div id="hamburgerMenuButton" class="w-5 md:hidden">
+      {% render 'MobileHamburgerMenu' %}
+    </div>
+    <p>Dusk Shades</p>
+    <div
+      id="mobileMenu"
+      class="
+        hidden flex justify-between fixed top-0 left-0 h-full w-11/12 bg-slate-900 p-8
+        md:flex md:relative md:h-auto md:w-auto md:bg-inherit md:p-0
+      "
+    >
+      <nav>
         {% for link in linklists['main-menu'].links %}
-          <a href="{{ link.url }}"> {{ link.title }}</a>
+          <a
+            class="
+              block mb-2
+              md:inline-block md:mr-2
+            "
+            href="{{ link.url }}"
+          >
+            {{ link.title }}
+          </a>
         {% endfor %}
       </nav>
-    {% endcomment %}
-    <p>Dusk Shades</p>
-    <img src="{{ 'CartMajor.svg' | asset_img_url }}" loading="lazy">
+      <div id="mobileMenuCancelButton" class="md:hidden w-5">
+        {% render 'MobileCancelMajor' %}
+      </div>
+    </div>
+    <div class="w-5">
+      {% render 'CartMajor' %}
+    </div>
   </div>
 </header>
