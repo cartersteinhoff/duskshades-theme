@@ -1,1 +1,56 @@
-<p>This is the product section.</p>
+<div class="flex justify-center">
+  <div>
+    {{ product | image_url: width: 350 | image_tag }}
+    <p class="text-2xl">{{ product.title }}</p>
+    <p>{{ product.description }}</p>
+    <p>{{ product.price | money_without_trailing_zeros }}</p>
+    <div x-data="
+        {
+            addToCart() {
+            console.log('{{ product.title }} ')
+            let formData = new FormData($refs.product_form);
+
+            fetch(window.Shopify.routes.root + 'cart/add.js', {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => {
+              return response.json();
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+          }
+        }
+      ">
+      {% form 'product', product, x-ref: 'product_form' %}
+        <select class="hidden" name="id">
+          <option value="{{ product.selected_or_first_available_variant.id }}"></option>
+          <script>
+            console.log({{ product.id }})
+            console.log({{ product.selected_or_first_available_variant.id }})
+          </script>
+        </select>
+        <div>
+          <label for="quantity">Quantity</label>
+          <select name="quantity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <button
+          type="button"
+          name="add"
+          @click="addToCart()"
+          class="border-solid border-2 border-black w-full p-2 cursor-pointer"
+        >
+          Add to Cart
+        </button>
+        {% comment %} <input type="submit" value="Add to cart" > {% endcomment %}
+      {% endform %}
+    </div>
+  </div>
+</div>

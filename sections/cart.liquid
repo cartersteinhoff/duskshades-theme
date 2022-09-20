@@ -1,1 +1,4 @@
-<p>This is the cart section.</p>
+{% for item in cart.items %}
+  {{ item.title }}
+  {{ item.quantity }}
+{% endfor %}
